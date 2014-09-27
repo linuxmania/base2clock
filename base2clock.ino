@@ -18,13 +18,14 @@
 
 
 //adjust fudge factor and offset to tune the arduino.
+
 //slow float fudge_factor = 1.001;
 //slightly fast float fudge_factor = 1.0012;
 //very slightly fast float fudge_factor = 1.0011;
 float fudge_factor = 1.00107;
 int offset = 15;
 
-unsigned long prev_mils,mil,sec,mins,hr,reset_mills = 0;
+unsigned long prev_mils,mil,sec,mins,hr,reset_mil = 0;
 
 //initially set hours to zero and minutes to zero.
 int hr_init = 0;
@@ -38,22 +39,26 @@ boolean time_set,reset_slow,reset_fast = false;
 
 //call this function if a time set button is pressed.
 void reset_init(){
-  reset_mills = mil;
+  reset_mil = mil;
 
-  //use current time setting as new initial values.
   hr_init = 0;
   min_init = 2;
-  if(p1 == 1) hr_init = 4;
-  if(p2 == 1) hr_init += 2;
-  if(p3 == 1) hr_init += 1;
-  if(p4 == 1) min_init += 30;
-  if(p5 == 1) min_init += 15;
-  if(p6 == 1) min_init += 8;
-  if(p7 == 1) min_init += 4;
-  if(p8 == 1) min_init += 2;
   
-  if(p6 == 1 && p7 == 1 && p8 == 1)
-    min_init -= 1;
+  if(time_set){  
+    //use current time setting as new initial values.
+    if(p1 == 1) hr_init = 4;
+    if(p2 == 1) hr_init += 2;
+    if(p3 == 1) hr_init += 1;
+    if(p4 == 1) min_init += 30;
+    if(p5 == 1) min_init += 15;
+    if(p6 == 1) min_init += 8;
+    if(p7 == 1) min_init += 4;
+    if(p8 == 1) min_init += 2;
+    
+    if(p6 == 1 && p7 == 1 && p8 == 1)
+      min_init -= 1;
+  }  
+  else time_set = true;  
 }
 
 void setup(){
@@ -92,12 +97,10 @@ void loop(){
   //see if the time is being set. 
   if(digitalRead(5) == LOW){
     reset_slow = true;
-    time_set = true;
     reset_init();    
   }  else {
     if(digitalRead(4) == LOW){
       reset_fast = true;
-      time_set = true;
       reset_init();    
     }  
   }
@@ -145,7 +148,7 @@ void loop(){
   }else{
 
     //subtract lapsed time since last occasion that the time was set.    
-    mil -= reset_mills;
+    mil -= reset_mil;
   
     // TUNE your arduino
     sec = (mil/1000 * fudge_factor) + offset;
