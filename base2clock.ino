@@ -34,16 +34,15 @@ int min_init = 0;
 int p1,p2,p3,p4,p5,p6,p7,p8 = 0;
 
 //booleans for time setting purposes.
-boolean time_set,add_2_mins,subtract_1_min,reset_slow,reset_fast = false;
+boolean time_set,reset_slow,reset_fast = false;
 
 //call this function if a time set button is pressed.
 void reset_init(){
-  add_2_mins = true;
   reset_mills = mil;
 
   //use current time setting as new initial values.
   hr_init = 0;
-  min_init = 0;
+  min_init = 2;
   if(p1 == 1) hr_init = 4;
   if(p2 == 1) hr_init += 2;
   if(p3 == 1) hr_init += 1;
@@ -54,7 +53,7 @@ void reset_init(){
   if(p8 == 1) min_init += 2;
   
   if(p6 == 1 && p7 == 1 && p8 == 1)
-    subtract_1_min = true;
+    min_init -= 1;
 }
 
 void setup(){
@@ -78,13 +77,11 @@ void loop(){
   //reinitialize time setting booleans to false.
   reset_fast = false;
   reset_slow = false;
-  add_2_mins = false;
-  subtract_1_min = false;
 
   //get the time that the program has been running, to calculate time.
   mil = millis();
   
-  //add this to determine if mil has counted 46 days and has reset.
+  //add this to determine if mil has counted 50 days and has reset.
   if(prev_mils != 0){
     if(prev_mils > mil){
       time_set = false;
@@ -155,10 +152,6 @@ void loop(){
   
     //calculate values for hours and minutes.  
     mins = sec/60;
-    if(add_2_mins)
-      min_init += 2;
-    if(subtract_1_min)
-      min_init -= 1;     
     mins += min_init;
     hr = mins/60;
     mins -= (hr*60);
