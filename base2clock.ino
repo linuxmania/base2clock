@@ -46,7 +46,7 @@ void reset_init(){
   if(p1 == 1) hr_init = 4;
   if(p2 == 1) hr_init += 2;
   if(p3 == 1) hr_init += 1;
-  if(p4 == 1) min_init = 30;
+  if(p4 == 1) min_init += 30;
   if(p5 == 1) min_init += 15;
   if(p6 == 1) min_init += 8;
   if(p7 == 1) min_init += 4;
