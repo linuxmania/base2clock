@@ -24,7 +24,8 @@
 //very slightly fast float fudge_factor = 1.0011;
 // became too fast over time float fudge_factor = 1.00107;
 // slow float fudge_factor = 1.0006;
-float fudge_factor = 1.0008;
+// slow float fudge_factor = 1.0008;
+float fudge_factor = 1.00095;
 int offset = 15;
 
 unsigned long prev_mils,mil,sec,mins,hr,reset_mil = 0;
