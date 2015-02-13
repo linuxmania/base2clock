@@ -38,7 +38,7 @@ int min_init = 0;
 int p1,p2,p3,p4,p5,p6,p7,p8 = 0;
 
 //booleans for time setting purposes.
-boolean time_set,reset_slow,reset_fast = false;
+boolean time_set,reset_slow,reset_fast,overflow = false;
 
 //call this function if a time set button is pressed.
 void reset_init(){
@@ -90,11 +90,9 @@ void loop(){
   mil = millis();
   
   //add this to determine if mil has counted 50 days and has reset.
-  if(prev_mils != 0){
-    if(prev_mils > mil){
-      time_set = false;
-    }  
-  }  
+    if(prev_mils > mil)
+	overflow = true;
+
   prev_mils = mil;
  
   //see if the time is being set. 
@@ -109,8 +107,7 @@ void loop(){
   }
 
   //if the time has not been set since the last power cycle
-  //or mil has counted over 50 days and reset, just keep blinking all
-  //the lights till the time is set.
+  //blinking all the lights till the time is set.
   if(!time_set){
     if(p1 == 1){
       digitalWrite(13, LOW);   
@@ -146,7 +143,36 @@ void loop(){
       p7=1;   
       digitalWrite(6, HIGH);   
       p8=1;   
-    }   
+    }  
+  //else if mil has counted over 50 days and reset, just keep blinking 12:34     
+  }else if(overflow){
+    
+    if(p1 == 1){
+      digitalWrite(13, LOW);   
+      p1=0;   
+      digitalWrite(12, LOW);   
+      p2=0;   
+      digitalWrite(11, LOW);   
+      p3=0;   
+      digitalWrite(10, LOW);   
+      p4=0;   
+      digitalWrite(9, LOW);   
+      p5=0;   
+      digitalWrite(8, LOW);   
+      p6=0;   
+      digitalWrite(7, LOW);   
+      p7=0;   
+      digitalWrite(6, LOW);   
+      p8=0;   
+    }else{
+      digitalWrite(13, HIGH);   
+      p1=1;   
+      digitalWrite(10, HIGH);   
+      p4=1;   
+      digitalWrite(7, HIGH);   
+      p7=1;   
+    }  
+    
   //else everything is copasetic, display the time
   }else{
 
@@ -274,7 +300,7 @@ void loop(){
   if(reset_fast){
     delay(100);
   }else{
-    if(reset_slow || !time_set){
+    if(reset_slow || !time_set || overflow){
       delay(1000);
     }else{
       delay(5000);
