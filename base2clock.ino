@@ -38,7 +38,7 @@ int min_init = 0;
 int p1,p2,p3,p4,p5,p6,p7,p8 = 0;
 
 //booleans for time setting purposes.
-boolean time_set,reset_slow,reset_fast,overflow = false;
+boolean time_set,reset_slow,reset_fast,overflowed = false;
 
 //call this function if a time set button is pressed.
 void reset_init(){
@@ -90,8 +90,8 @@ void loop(){
   mil = millis();
   
   //add this to determine if mil has counted 50 days and has reset.
-    if(prev_mils > mil)
-	overflow = true;
+  if(prev_mils > mil)
+    overflowed = true;
 
   prev_mils = mil;
  
@@ -145,7 +145,7 @@ void loop(){
       p8=1;   
     }  
   //else if mil has counted over 50 days and reset, just keep blinking 12:34     
-  }else if(overflow){
+  }else if(overflowed){
     
     if(p1 == 1){
       digitalWrite(13, LOW);   
@@ -300,7 +300,7 @@ void loop(){
   if(reset_fast){
     delay(100);
   }else{
-    if(reset_slow || !time_set || overflow){
+    if(reset_slow || !time_set || overflowed){
       delay(1000);
     }else{
       delay(5000);
