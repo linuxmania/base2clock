@@ -22,7 +22,7 @@
 int p1,p2,p3,p4,p5,p6,p7,p8,p9 = 0;
 
 int iterations = 0;
-boolean increment, reset_fast, reset_slow = false;
+boolean increment, reset_fast, reset_slow, time_set = false;
 
 void setup(){
   //8 led's as outputs.
