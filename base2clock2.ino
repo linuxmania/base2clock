@@ -50,9 +50,13 @@ void loop(){
   //see if the time is being set. 
   if(digitalRead(5) == LOW){
     reset_slow = true;
+    increment = true;
+    time_set = true;
   }  else {
     if(digitalRead(4) == LOW){
       reset_fast = true;
+	    increment = true;
+	    time_set = true;
     }  
   }
 
@@ -169,14 +173,10 @@ void loop(){
 	
   if(reset_fast){
     delay(100);
-		increment = true;
-		time_set = true;
 		iterations = 0;
   }else{
     if(reset_slow){
       delay(1000);
-			increment = true;
-			time_set = true;
 			iterations = 0;
     }else{
 			if(!time_set)
