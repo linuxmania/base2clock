@@ -22,7 +22,7 @@
 int p1,p2,p3,p4,p5,p6,p7,p8,p9 = 0;
 
 int iterations = 0;
-boolean increment = false;
+boolean increment, reset_fast, reset_slow = false;
 
 void setup(){
   //8 led's as outputs.
@@ -42,6 +42,19 @@ void setup(){
 } // end setup()
 
 void loop(){
+
+  //reinitialize time setting booleans to false.
+  reset_fast = false;
+  reset_slow = false;
+
+  //see if the time is being set. 
+  if(digitalRead(5) == LOW){
+    reset_slow = true;
+  }  else {
+    if(digitalRead(4) == LOW){
+      reset_fast = true;
+    }  
+  }
 
 	if(!time_set){
 		if(p8 == 1)
