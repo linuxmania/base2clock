@@ -94,11 +94,11 @@ void loop(){
     delay(100);
     iterations = 0;
   } else if(reset_slow){
-      delay(1000);
-      iterations = 0;
-    } else if(!time_set) {
-        delay(1000);
-      } else delay(INTERVAL_TIME);
+    delay(1000);
+    iterations = 0;
+  } else if(!time_set) {
+    delay(1000);
+  } else delay(INTERVAL_TIME);
 } // end loop()
 
 boolean setIncrementFlag(){
