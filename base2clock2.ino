@@ -59,11 +59,11 @@ void loop(){
     increment = true;
     time_set = true;
   } else if(digitalRead(4) == LOW){
-      reset_fast = true;
-      setting_time = true;
-      increment = true;
-      time_set = true;
-    }  
+    reset_fast = true;
+    setting_time = true;
+    increment = true;
+    time_set = true;
+  }  
 
   if(!time_set){ // time has never been set so just blink the lights.
     if(p8 == 1)
@@ -102,11 +102,10 @@ void loop(){
 } // end loop()
 
 boolean setIncrementFlag(){
-  if(p9 == 0){
-    if(p8 == 0 || p7 == 0 || p6 == 0){
-      p9 = 1;
-      return true;
-    }
+  if(p9 == 0 && (p8 == 0 || p7 == 0 || p6 == 0)){
+    p9 = 1;
+    return true;
+  }
   return false;
 }
 
@@ -114,57 +113,32 @@ void doIncrement(){
   increment = false;
   p9 = 0;
   
-  switch(1) {
-    case 1:
-      if(p8 == 0){
-        p8 = 1;
-        break;
-      } 
-    case 2:
-      if(p7 == 0){
-        p7 = 1;
-        p8 = 0;
-        break;
-      } 
-    case 3:
-      if(p6 == 0){
-        p6 = 1;
-        p8 = p7 = 0;
-        break;
-      } 
-    case 4:
-      if(p5 == 0){
-        p5 = 1;
-        p8 = p7 = p6 = 0;
-        break;
-      } 
-    case 5:
-      if(p4 == 0){
-        p4 = 1;
-        p8 = p7 = p6 = p5 = 0;
-        break;
-      } 
-    case 6:
-      if(p3 == 0){
-        p3 = 1;
-        p8 = p7 = p6 = p5 = p4 = 0;
-        break;
-      } 
-    case 7:
-      if(p2 == 0){
-        p2 = 1;
-        p8 = p7 = p6 = p5 = p4 = p3 = 0;
-        break;
-      } 
-    case 8:
-      if(p1 == 0) {
-        p1 = 1;
-        p8 = p7 = p6 = p5 = p4 = p3 = p2 = 0;
-        break;
-      } 
-    default: // all lights were lit, so this increment resets them to all off  
-      p8 = p7 = p6 = p5 = p4 = p3 = p2 = p1 = 0;
-  } // end switch
+  if(p8 == 0){
+    p8 = 1;
+  } else if (p7 == 0){
+    p7 = 1;
+    p8 = 0;
+  } else if (p6 == 0){
+    p6 = 1;
+    p8 = p7 = 0;
+  } else if (p5 == 0){
+    p5 = 1;
+    p8 = p7 = p6 = 0;
+  } else if (p4 == 0){
+    p4 = 1;
+    p8 = p7 = p6 = p5 = 0;
+  } else if (p3 == 0){
+    p3 = 1;
+    p8 = p7 = p6 = p5 = p4 = 0;
+  } else if (p2 == 0){
+    p2 = 1;
+    p8 = p7 = p6 = p5 = p4 = p3 = 0;
+  } else if (p1 == 0){
+    p1 = 1;
+    p8 = p7 = p6 = p5 = p4 = p3 = p2 = 0;
+  } else { // all lights were lit, so this increment resets them to all off 
+    p8 = p7 = p6 = p5 = p4 = p3 = p2 = p1 = 0;
+  }
 } // end doIncrement()
 
 
