@@ -82,6 +82,7 @@ void loop(){
       if(p9 == 0){
         if(p8 == 1 && p7 == 1 && p6 == 1){
           p8 = p7 = p6 = 0;
+          // p8, p7, and p6 were all 1, so now see if any lights are zero and set them to 1.
           if(p5 == 0){
             p5 = 1;
           } 
@@ -171,12 +172,12 @@ void loop(){
 
 
   if(reset_fast){
-    delay(100);
+    delay(70);
     iterations = 0;
   }
   else{
     if(reset_slow){
-      delay(1000);
+      delay(700);
       iterations = 0;
     }
     else{
