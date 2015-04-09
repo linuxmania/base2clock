@@ -101,7 +101,7 @@ void loop(){
       } else delay(INTERVAL_TIME);
 } // end loop()
 
-bool setIncrementFlag(){
+boolean setIncrementFlag(){
   if(p9 == 0){
     if(p8 == 0 || p7 == 0 || p6 == 0){
       p9 = 1;
