@@ -88,13 +88,13 @@ void loop(){
   } //end time_set is true
 
   // figure out the loop delay, typically 5 seconds, 1 second if the time has never been set
-  // and we are blinking the lights, 0.07 seconds if we are coarse setting the time and 0.7 seconds
+  // and we are blinking the lights, 0.1 second if we are coarse setting the time and 1 second
   // if we are fine setting the time.
   if(reset_fast){
-    delay(70);
+    delay(100);
     iterations = 0;
   } else if(reset_slow){
-      delay(700);
+      delay(1000);
       iterations = 0;
     } else if(!time_set) {
         delay(1000);
