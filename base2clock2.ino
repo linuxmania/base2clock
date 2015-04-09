@@ -65,7 +65,7 @@ void loop(){
     }  
   }
 
-  if(!time_set){
+  if(!time_set){ // time has never been set so just blink the lights.
     if(p8 == 1)
       p8 = p7 = p6 = p5 = p4 = p3 = p2 = p1 = 0;
     else	
