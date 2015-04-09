@@ -25,7 +25,7 @@
 int p1,p2,p3,p4,p5,p6,p7,p8,p9 = 0;
 
 int iterations = 0;
-boolean increment, reset_fast, reset_slow, time_set = false;
+boolean increment, reset_fast, reset_slow, time_set, setting_time = false;
 
 void setup(){
   //8 led's as outputs.
@@ -50,14 +50,17 @@ void loop(){
   //reinitialize time setting booleans to false.
   reset_fast = false;
   reset_slow = false;
-
+  setting_time = false;
+  
   //see if the time is being set. 
   if(digitalRead(5) == LOW){
     reset_slow = true;
+    setting_time = true;
     increment = true;
     time_set = true;
   } else if(digitalRead(4) == LOW){
       reset_fast = true;
+      setting_time = true;
       increment = true;
       time_set = true;
     }  
@@ -77,8 +80,10 @@ void loop(){
       }
     }
     if(increment){
-      doIncrement();
-      lightLights();
+      if(setting_time || !setIncrementFlag()){
+        doIncrement();
+        lightLights();
+      }
     } 
   } //end time_set is true
 
@@ -96,64 +101,72 @@ void loop(){
       } else delay(INTERVAL_TIME);
 } // end loop()
 
+bool setIncrementFlag(){
+  if(p9 == 0){
+    if(p8 == 0 || p7 == 0 || p6 == 0){
+      p9 = 1;
+      return true;
+    }
+  return false;
+}
+
 void doIncrement(){
   increment = false;
-  if(p9 == 0){
-    if(p8 == 1 && p7 == 1 && p6 == 1){
-      p8 = p7 = p6 = 0;
-      
-      // p8, p7, and p6 were all 1, so now see if any lights are zero and set them to 1,
-      // otherwise, set all lights to zero.
-      switch(1) {
-        case 1:
-          if(p5 == 0){
-            p5 = 1;
-            break;
-          } 
-        case 2:
-          if(p4 == 0){
-            p4 = 1;
-            p5 = 0;
-            break;
-          } 
-        case 3:
-          if(p3 == 0){
-            p3 = 1;
-            p4 = p5 = 0;
-            break;
-          } 
-        case 4:
-          if(p2 == 0){
-            p2 = 1;
-            p3 = p4 = p5 = 0;
-            break;
-          } 
-        case 5:
-          if(p1 == 0) {
-            p1 = 1;
-            p2 = p3 = p4 = p5 = 0;
-            break;
-          } 
-        default: // all lights were lit, so this increment resets them to all off  
-          p1 = p2 = p3 = p4 = p5 = 0;
-      } // end switch
-      
-    } else { // p9 is zero, and so is either p8, p7, or p6, so set p9 to 1.
-      p9 = 1;
-    }  
-  } else { // p9 equals 1, so either p8, p7, or p6 must be zero.
-    p9 = 0;
-    if(p8 == 0){
-      p8 = 1;
-    } else if(p7 == 0){
+  p9 = 0;
+  
+  switch(1) {
+    case 1:
+      if(p8 == 0){
+        p8 = 1;
+        break;
+      } 
+    case 2:
+      if(p7 == 0){
         p7 = 1;
         p8 = 0;
-      } else { // p6 must be zero
+        break;
+      } 
+    case 3:
+      if(p6 == 0){
         p6 = 1;
-        p7 = p8 = 0;
-      }  
-  } // end p9 equals 1  		
+        p8 = p7 = 0;
+        break;
+      } 
+    case 4:
+      if(p5 == 0){
+        p5 = 1;
+        p8 = p7 = p6 = 0;
+        break;
+      } 
+    case 5:
+      if(p4 == 0){
+        p4 = 1;
+        p8 = p7 = p6 = p5 = 0;
+        break;
+      } 
+    case 6:
+      if(p3 == 0){
+        p3 = 1;
+        p8 = p7 = p6 = p5 = p4 = 0;
+        break;
+      } 
+    case 7:
+      if(p2 == 0){
+        p2 = 1;
+        p8 = p7 = p6 = p5 = p4 = p3 = 0;
+        break;
+      } 
+    case 8:
+      if(p1 == 0) {
+        p1 = 1;
+        p8 = p7 = p6 = p5 = p4 = p3 = p2 = 0;
+        break;
+      } 
+    default: // all lights were lit, so this increment resets them to all off  
+      p8 = p7 = p6 = p5 = p4 = p3 = p2 = p1 = 0;
+  } // end switch
 } // end doIncrement()
+
 
 void lightLights() {
   if(p1 == 1)
