@@ -106,7 +106,7 @@ void loop(){
                     p1 = 1;
                     p2 = p3 = p4 = p5 = 0;
                   } 
-                  else { // all lights were lit, so this increment resets tthem to all off
+                  else { // all lights were lit, so this increment resets them to all off
                     p1 = p2 = p3 = p4 = p5 = 0;
                   }	    
                 }   
@@ -117,7 +117,7 @@ void loop(){
           p9 = 1;
         }  
       } 
-      else { // p9 equals 1
+      else { // p9 equals 1, so either p8, p7, or p6 must be zero.
         p9 = 0;
         if(p8 == 0){
           p8 = 1;
