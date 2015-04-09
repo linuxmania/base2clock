@@ -70,7 +70,7 @@ void loop(){
     lightLights();
   } else { //time has been set, so increment as instructed.
     if(!increment){
-      iterations += 1;
+      iterations++;
       if(iterations == 12){
         iterations = 0;
         increment = true;
