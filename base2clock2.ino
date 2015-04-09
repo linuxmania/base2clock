@@ -67,7 +67,7 @@ void loop(){
       p8 = p7 = p6 = p5 = p4 = p3 = p2 = p1 = 0;
     else	
       p8 = p7 = p6 = p5 = p4 = p3 = p2 = p1 = 1;
-  } else { //time_set is true
+  } else { //time has been set, so increment as instructed.
     iterations += 1;
     if(iterations == 12){
       iterations = 0;
