@@ -99,7 +99,8 @@ void doIncrement(){
     if(p8 == 1 && p7 == 1 && p6 == 1){
       p8 = p7 = p6 = 0;
       
-      // p8, p7, and p6 were all 1, so now see if any lights are zero and set them to 1.
+      // p8, p7, and p6 were all 1, so now see if any lights are zero and set them to 1,
+      // otherwise, set all lights to zero.
       switch(1) {
         case 1:
           if(p5 == 0){
