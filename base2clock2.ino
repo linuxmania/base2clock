@@ -18,6 +18,8 @@
  * 
  ****************************/
 
+#define INTERVAL_TIME 5000
+
 //int's representing led's. 1 = on, 0 = off. Initially they will all be off.
 int p1,p2,p3,p4,p5,p6,p7,p8,p9 = 0;
 
@@ -68,10 +70,8 @@ void loop(){
       p8 = p7 = p6 = p5 = p4 = p3 = p2 = p1 = 0;
     else	
       p8 = p7 = p6 = p5 = p4 = p3 = p2 = p1 = 1;
-  } 
-  else { //time_set is true
-
-      iterations +=1;
+  } else { //time_set is true
+    iterations += 1;
     if(iterations == 12){
       iterations = 0;
       increment = true;
@@ -81,9 +81,7 @@ void loop(){
       increment = false;
       if(p9 == 0){
         if(p8 == 1 && p7 == 1 && p6 == 1){
-          p8 = 0;
-          p7 = 0;
-          p6 = 0;
+          p8 = p7 = p6 = 0;
           if(p5 == 0){
             p5 = 1;
           } 
@@ -95,37 +93,26 @@ void loop(){
             else {
               if(p3 == 0){
                 p3 = 1;
-                p4 = 0;
-                p5 = 0;
+                p4 = p5 = 0;
               } 
               else {
                 if(p2 == 0){
                   p2 = 1;
-                  p3 = 0;
-                  p4 = 0;
-                  p5 = 0;
+                  p3 = p4 = p5 = 0;
                 } 
                 else {
                   if(p1 == 0) {
                     p1 = 1;
-                    p2 = 0;
-                    p3 = 0;
-                    p4 = 0;
-                    p5 = 0;
+                    p2 = p3 = p4 = p5 = 0;
                   } 
-                  else {
-                    p1 = 0;
-                    p2 = 0;
-                    p3 = 0;
-                    p4 = 0;
-                    p5 = 0;	      
+                  else { // all lights were lit, so this increment resets tthem to all off
+                    p1 = p2 = p3 = p4 = p5 = 0;
                   }	    
                 }   
               }  	
             }	
           }  
-        } 
-        else {
+        } else { // p9 is zero, and so is either p8, p7, or p6.
           p9 = 1;
         }  
       } 
@@ -139,17 +126,16 @@ void loop(){
             p7 = 1;
             p8 = 0;
           } 
-          else {
+          else { // p6 must be zero
             p6 = 1;
-            p7 = 0;
-            p8 = 0;	
+            p7 = p8 = 0;
           }  
         }	    
-      }  		
+      } // end p9 equals 1  		
     } // end if(increment)
-
   } //end time_set is true
 
+  //light the appropriate lights
   if(p1 == 1)
     digitalWrite(13, HIGH);
   else	
@@ -197,7 +183,7 @@ void loop(){
       if(!time_set)
         delay(1000);
       else
-        delay(5000);
+        delay(INTERVAL_TIME);
     }  
   }    	
 
