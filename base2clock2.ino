@@ -69,10 +69,12 @@ void loop(){
       p8 = p7 = p6 = p5 = p4 = p3 = p2 = p1 = 1;
     lightLights();
   } else { //time has been set, so increment as instructed.
-    iterations += 1;
-    if(iterations == 12){
-      iterations = 0;
-      increment = true;
+    if(!increment){
+      iterations += 1;
+      if(iterations == 12){
+        iterations = 0;
+        increment = true;
+      }
     }
     if(increment){
       doIncrement();
