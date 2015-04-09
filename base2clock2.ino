@@ -67,17 +67,18 @@ void loop(){
       p8 = p7 = p6 = p5 = p4 = p3 = p2 = p1 = 0;
     else	
       p8 = p7 = p6 = p5 = p4 = p3 = p2 = p1 = 1;
+    lightLights();
   } else { //time has been set, so increment as instructed.
     iterations += 1;
     if(iterations == 12){
       iterations = 0;
       increment = true;
     }
-    if(increment) doIncrement();
+    if(increment){
+      doIncrement();
+      lightLights();
+    } 
   } //end time_set is true
-
-  //light the appropriate lights
-  lightLights();
 
   // figure out the loop delay, typically 5 seconds, 1 second if the time has never been set
   // and we are blinking the lights, 0.07 seconds if we are coarse setting the time and 0.7 seconds
