@@ -42,7 +42,6 @@ void setup(){
   digitalWrite(5, HIGH);
   pinMode(4, INPUT); 
   digitalWrite(4, HIGH);
-
 } // end setup()
 
 void loop(){
@@ -56,14 +55,11 @@ void loop(){
     reset_slow = true;
     increment = true;
     time_set = true;
-  }  
-  else {
-    if(digitalRead(4) == LOW){
+  } else if(digitalRead(4) == LOW){
       reset_fast = true;
       increment = true;
       time_set = true;
     }  
-  }
 
   if(!time_set){ // time has never been set so just blink the lights.
     if(p8 == 1)
@@ -80,40 +76,11 @@ void loop(){
   } //end time_set is true
 
   //light the appropriate lights
-  if(p1 == 1)
-    digitalWrite(13, HIGH);
-  else	
-    digitalWrite(13, LOW);   
-  if(p2 == 1)
-    digitalWrite(12, HIGH);
-  else	
-    digitalWrite(12, LOW);   
-  if(p3 == 1)
-    digitalWrite(11, HIGH);
-  else	
-    digitalWrite(11, LOW);   
-  if(p4 == 1)
-    digitalWrite(10, HIGH);
-  else	
-    digitalWrite(10, LOW);   
-  if(p5 == 1)
-    digitalWrite(9, HIGH);
-  else	
-    digitalWrite(9, LOW);   
-  if(p6 == 1)
-    digitalWrite(8, HIGH);
-  else	
-    digitalWrite(8, LOW);   
-  if(p7 == 1)
-    digitalWrite(7, HIGH);
-  else	
-    digitalWrite(7, LOW);   
-  if(p8 == 1)
-    digitalWrite(6, HIGH);
-  else	
-    digitalWrite(6, LOW);   
+  lightLights();
 
-
+  // figure out the loop delay, typically 5 seconds, 1 second if the time has never been set
+  // and we are blinking the lights, 0.07 seconds if we are coarse setting the time and 0.7 seconds
+  // if we are fine setting the time.
   if(reset_fast){
     delay(70);
     iterations = 0;
@@ -166,21 +133,54 @@ void doIncrement(){
           p1 = p2 = p3 = p4 = p5 = 0;
       } // end switch
       
-    } else { // p9 is zero, and so is either p8, p7, or p6.
+    } else { // p9 is zero, and so is either p8, p7, or p6, so set p9 to 1.
       p9 = 1;
     }  
   } else { // p9 equals 1, so either p8, p7, or p6 must be zero.
     p9 = 0;
     if(p8 == 0){
       p8 = 1;
-    } else {
-      if(p7 == 0){
+    } else if(p7 == 0){
         p7 = 1;
         p8 = 0;
       } else { // p6 must be zero
         p6 = 1;
         p7 = p8 = 0;
       }  
-    }	    
   } // end p9 equals 1  		
 } // end doIncrement()
+
+void lightLights() {
+  if(p1 == 1)
+    digitalWrite(13, HIGH);
+  else	
+    digitalWrite(13, LOW);   
+  if(p2 == 1)
+    digitalWrite(12, HIGH);
+  else	
+    digitalWrite(12, LOW);   
+  if(p3 == 1)
+    digitalWrite(11, HIGH);
+  else	
+    digitalWrite(11, LOW);   
+  if(p4 == 1)
+    digitalWrite(10, HIGH);
+  else	
+    digitalWrite(10, LOW);   
+  if(p5 == 1)
+    digitalWrite(9, HIGH);
+  else	
+    digitalWrite(9, LOW);   
+  if(p6 == 1)
+    digitalWrite(8, HIGH);
+  else	
+    digitalWrite(8, LOW);   
+  if(p7 == 1)
+    digitalWrite(7, HIGH);
+  else	
+    digitalWrite(7, LOW);   
+  if(p8 == 1)
+    digitalWrite(6, HIGH);
+  else	
+    digitalWrite(6, LOW);   
+} // end lightLights()  
