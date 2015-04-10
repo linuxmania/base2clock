@@ -27,6 +27,8 @@ int p1,p2,p3,p4,p5,p6,p7,p8,p9 = 0;
 int iterations = 0;
 boolean increment, reset_fast, reset_slow, time_set, setting_time = false;
 
+boolean setTimeSlowState, setTimeFastState = false;
+
 void setup(){
   //8 led's as outputs.
   pinMode(13, OUTPUT);     
@@ -43,7 +45,35 @@ void setup(){
   digitalWrite(5, HIGH);
   pinMode(4, INPUT); 
   digitalWrite(4, HIGH);
+  
+  attachInterrupt(1, setTimeSlow , CHANGE); // pin 3
+  attachInterrupt(0, setTimeFast , CHANGE); // pin 2
+  
 } // end setup()
+
+void setTimeFast(){
+  setTimeFastState = !setTimeFastState;
+  time_set = true;
+  iterations = 0;
+  p9 = 0;
+  while(setTimeFastState){
+    doIncrement();
+    lightLights();
+    delay(100);
+  }
+}
+
+void setTimeSlow(){
+  setTimeSlowState = !setTimeSlowState;
+  time_set = true;
+  iterations = 0;
+  p9 = 0;
+  while(setTimeSlowState){
+    doIncrement();
+    lightLights();
+    delay(1000);
+  }
+}
 
 void loop(){
   //reinitialize time setting booleans to false.
