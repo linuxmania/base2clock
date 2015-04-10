@@ -25,9 +25,7 @@
 int p1,p2,p3,p4,p5,p6,p7,p8,p9 = 0;
 
 int iterations = 0;
-boolean increment, reset_fast, reset_slow, time_set, setting_time = false;
-
-boolean setTimeSlowState, setTimeFastState = false;
+boolean increment, time_set, setTimeSlowState, setTimeFastState = false;
 
 void setup(){
   //8 led's as outputs.
@@ -40,56 +38,13 @@ void setup(){
   pinMode(7, OUTPUT);     
   pinMode(6, OUTPUT);
 
-  //2 time set buttons as inputs.
-  pinMode(5, INPUT); 
-  digitalWrite(5, HIGH);
-  pinMode(4, INPUT); 
-  digitalWrite(4, HIGH);
-  
   attachInterrupt(1, setTimeSlow , CHANGE); // pin 3
   attachInterrupt(0, setTimeFast , CHANGE); // pin 2
   
 } // end setup()
 
-void setTimeFast(){
-  setTimeFastState = !setTimeFastState;
-  time_set = true;
-  iterations = 0;
-  p9 = 0;
-  while(setTimeFastState){
-    doIncrement();
-    lightLights();
-    delay(100);
-  }
-}
-
-void setTimeSlow(){
-  setTimeSlowState = !setTimeSlowState;
-  time_set = true;
-  iterations = 0;
-  p9 = 0;
-  while(setTimeSlowState){
-    doIncrement();
-    lightLights();
-    delay(1000);
-  }
-}
-
 void loop(){
-  //reinitialize time setting booleans to false.
-  reset_fast = false;
-  reset_slow = false;
-  setting_time = false;
-  
-  //see if the time is being set. 
-  if(digitalRead(5) == LOW){
-    reset_slow = true;
-    resetTimeSetFlags();
-  } else if(digitalRead(4) == LOW){
-    reset_fast = true;
-    resetTimeSetFlags();
-  }
-  
+
   if(!time_set){ // time has never been set so just blink the lights.
     if(p8 == 1)
       p8 = p7 = p6 = p5 = p4 = p3 = p2 = p1 = 0;
@@ -106,7 +61,7 @@ void loop(){
     }
     if(increment){
       increment = false;
-      if(setting_time || !setIncrementFlag()){
+      if(!setIncrementFlag()){
         doIncrement();
         lightLights();
       }
@@ -114,25 +69,36 @@ void loop(){
   } //end time_set is true
 
   // figure out the loop delay, typically 5 seconds, 1 second if the time has never been set
-  // and we are blinking the lights, 0.1 second if we are coarse setting the time and 1 second
-  // if we are fine setting the time.
-  if(reset_fast){
-    delay(100);
-    iterations = 0;
-  } else if(reset_slow){
-    delay(1000);
-    iterations = 0;
-  } else if(!time_set) {
+  // and we are blinking the lights. 
+  if(!time_set) {
     delay(1000);
   } else delay(INTERVAL_TIME);
 } // end loop()
 
-void resetTimeSetFlags(){
-  setting_time = true;
-  increment = true;
+void setTimeFast(){
+  setTimeFastState = !setTimeFastState;
+  increment = false;
   time_set = true;
   iterations = 0;
   p9 = 0;
+  while(setTimeFastState){
+    doIncrement();
+    lightLights();
+    delay(100);
+  }
+}
+
+void setTimeSlow(){
+  setTimeSlowState = !setTimeSlowState;
+  increment = false;
+  time_set = true;
+  iterations = 0;
+  p9 = 0;
+  while(setTimeSlowState){
+    doIncrement();
+    lightLights();
+    delay(1000);
+  }
 }
 
 boolean setIncrementFlag(){
