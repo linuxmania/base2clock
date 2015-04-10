@@ -52,13 +52,14 @@ void loop(){
   setting_time = false;
   
   //see if the time is being set. 
-  if(digitalRead(5) == LOW || digitalRead(4) == LOW)){
+  if(digitalRead(5) == LOW){
+    reset_slow = true;
     resetTimeSetFlags();
-    if(digitalRead(5) == LOW)
-      reset_slow = true;
-    else reset_fast = true;
-  }  
-
+  } else if(digitalRead(4) == LOW){
+    reset_fast = true;
+    resetTimeSetFlags();
+  }
+  
   if(!time_set){ // time has never been set so just blink the lights.
     if(p8 == 1)
       p8 = p7 = p6 = p5 = p4 = p3 = p2 = p1 = 0;
@@ -74,6 +75,7 @@ void loop(){
       }
     }
     if(increment){
+      increment = false;
       if(setting_time || !setIncrementFlag()){
         doIncrement();
         lightLights();
@@ -104,7 +106,6 @@ void resetTimeSetFlags(){
 }
 
 boolean setIncrementFlag(){
-  increment = false;
   if(p9 == 0 && (p8 == 0 || p7 == 0 || p6 == 0)){
     p9 = 1;
     return true;
@@ -113,7 +114,6 @@ boolean setIncrementFlag(){
 }
 
 void doIncrement(){
-  increment = false;
   p9 = 0;
   
   if(p8 == 0){
