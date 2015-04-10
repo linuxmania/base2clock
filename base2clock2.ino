@@ -43,9 +43,12 @@ void setup(){
   digitalWrite(5, HIGH);
   pinMode(4, INPUT); 
   digitalWrite(4, HIGH);
+  
+//  Serial.begin(9600);  
 } // end setup()
 
 void loop(){
+//  Serial.print("Hello world\n");  
 
   //reinitialize time setting booleans to false.
   reset_fast = false;
@@ -58,11 +61,15 @@ void loop(){
     setting_time = true;
     increment = true;
     time_set = true;
+    iterations = 0;
+    p9 = 0;
   } else if(digitalRead(4) == LOW){
     reset_fast = true;
     setting_time = true;
     increment = true;
     time_set = true;
+    iterations = 0;
+    p9 = 0;
   }  
 
   if(!time_set){ // time has never been set so just blink the lights.
@@ -102,6 +109,7 @@ void loop(){
 } // end loop()
 
 boolean setIncrementFlag(){
+  increment = false;
   if(p9 == 0 && (p8 == 0 || p7 == 0 || p6 == 0)){
     p9 = 1;
     return true;
