@@ -23,9 +23,9 @@
 
 //int's representing led's. 1 = on, 0 = off. Initially they will all be off.
 int p1,p2,p3,p4,p5,p6,p7,p8,p9 = 0;
-int iterations = 0;
+int iterations, count = 0;
 boolean time_set = false;
-unsigned long mils, prev_mils, mils2, prev_mils2 = 0;
+unsigned long mils, prev_mils = 0;
 
 void setup(){
   //8 led's as outputs.
@@ -46,25 +46,11 @@ void setup(){
   attachInterrupt(0, setTimeSlow , LOW); // pin 2
   attachInterrupt(1, setTimeFast , LOW); // pin 3
   
-  prev_mils = prev_mils2 = millis();
+  prev_mils = millis();
 
-  //time set buttons as inputs.
-//  pinMode(4, INPUT);
-//  digitalWrite(4, HIGH);  
 } // end setup()
 
 void loop(){
-  //reinitialize time setting booleans to false.
-//  reset_fast = false;
-//  reset_slow = false;
-//  setting_time = false;
-
-  //see if the time is being set.
-//  if(digitalRead(4) == LOW){
-//    reset_fast = true;
-//    resetTimeSetFlags();
-//  }
-
   if(time_set){ //time has been set, so increment as instructed.
     iterations++;
     if(iterations == 12){
@@ -81,11 +67,7 @@ void loop(){
   }
   
   // figure out the loop delay, typically 5 seconds, 1 second if the time has never been set
-  // and we are blinking the lights, 0.1 second if we are coarse setting the time and 1 second
-  // if we are fine setting the time.
-//  if(reset_fast){
-//    delay(100);
-//    iterations = 0;
+  // and we are blinking the lights
   if(!time_set) 
     delay(1000);
   else delay(INTERVAL_TIME);
@@ -102,16 +84,14 @@ void setTimeSlow(){
 
 void setTimeFast(){
   resetTimeSetFlags(); 
-  
-//  mils2 = millis();
-//  if(mils2 - prev_mils2 > 50)
+  count++;
+  if(count > 5000){
+    count = 0;
     doIncrement();
-//  prev_mils2 = mils2;  
+  }  
 }
 
 void resetTimeSetFlags(){
-//  setting_time = true;
-//  increment = true;
   time_set = true;
   iterations = 0;
   p9 = 0;
