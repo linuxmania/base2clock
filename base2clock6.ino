@@ -93,7 +93,7 @@ void setTimeFast(){
 
 void resetTimeSetFlags(){
   time_set = true;
-  iterations = 0;
+  iterations = 1;
   p9 = 0;
 }
 
