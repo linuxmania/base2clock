@@ -74,8 +74,7 @@ void loop(){
 } // end loop()
 
 void setTimeSlow(){
-  resetTimeSetFlags(); 
-  
+  resetTimeSetFlags();
   mils = millis();
   if(mils - prev_mils > 50)
     doIncrement();
