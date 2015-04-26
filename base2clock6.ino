@@ -19,7 +19,7 @@
  ****************************/
  
 // adjust this value to tune the clock. 5000 should be close, lower if clock runs slow, higher if fast.
-#define INTERVAL_TIME 4995
+#define INTERVAL_TIME 4996
 
 //int's representing led's. 1 = on, 0 = off. Initially they will all be off.
 int p1,p2,p3,p4,p5,p6,p7,p8,p9 = 0;
@@ -92,7 +92,7 @@ void setTimeFast(){
 
 void resetTimeSetFlags(){
   time_set = true;
-  iterations = 1;
+  iterations = 0;
   p9 = 0;
 }
 
