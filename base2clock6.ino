@@ -19,7 +19,8 @@
  ****************************/
  
 // adjust this value to tune the clock. 5000 should be close, lower if clock runs slow, higher if fast.
-#define INTERVAL_TIME 4996
+// #define INTERVAL_TIME 4996
+#define INTERVAL_TIME 9991
 
 //int's representing led's. 1 = on, 0 = off. Initially they will all be off.
 int p1,p2,p3,p4,p5,p6,p7,p8,p9 = 0;
@@ -53,7 +54,7 @@ void setup(){
 void loop(){
   if(time_set){ //time has been set, so increment as instructed.
     iterations++;
-    if(iterations == 12){
+    if(iterations == 6){
       iterations = 0;
       if(!setIncrementFlag())  
         doIncrement();    
