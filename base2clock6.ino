@@ -21,11 +21,13 @@
 // adjust this value to tune the clock. 5000 should be close, lower if clock runs slow, higher if fast.
 // #define INTERVAL_TIME 9991 slightly slow
 // #define INTERVAL_TIME 9990 very slightly slow
-#define INTERVAL_TIME 9989
+#define INTERVAL_TIME 9990
+#define PERCENT_FASTER 10
 
 //int's representing led's. 1 = on, 0 = off. Initially they will all be off.
 int p1,p2,p3,p4,p5,p6,p7,p8,p9 = 0;
-int iterations, count = 0;
+int iterations, count, time_count = 0;
+int interval_time = INTERVAL_TIME;
 boolean time_set = false;
 unsigned long mils, prev_mils = 0;
 
@@ -54,6 +56,12 @@ void setup(){
 
 void loop(){
   if(time_set){ //time has been set, so increment as instructed.
+    time_count++;
+    if(time_count == 1000 - (10*PERCENT_FASTER))
+     interval_time -= 1;
+    if(time_count >= 1000)
+     interval_time = INTERVAL_TIME;
+     
     iterations++;
     if(iterations == 6){
       iterations = 0;
@@ -72,7 +80,7 @@ void loop(){
   // and we are blinking the lights
   if(!time_set) 
     delay(1000);
-  else delay(INTERVAL_TIME);
+  else delay(interval_time);
 } // end loop()
 
 void setTimeSlow(){
