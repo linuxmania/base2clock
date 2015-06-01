@@ -59,9 +59,11 @@ void loop(){
     time_count++;
     if(time_count == 1000 - (10*PERCENT_FASTER))
      interval_time -= 1;
-    if(time_count >= 1000)
+    if(time_count >= 1000){
+     time_count = 0;
      interval_time = INTERVAL_TIME;
-     
+    }
+    
     iterations++;
     if(iterations == 6){
       iterations = 0;
