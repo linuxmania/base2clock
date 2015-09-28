@@ -22,7 +22,7 @@
 // #define INTERVAL_TIME 9991 slightly slow
 // #define INTERVAL_TIME 9990 very slightly slow
 #define INTERVAL_TIME 9990
-#define PERCENT_FASTER 50
+#define PERCENT_FASTER 35
 
 //int's representing led's. 1 = on, 0 = off. Initially they will all be off.
 int p1,p2,p3,p4,p5,p6,p7,p8,p9 = 0;
