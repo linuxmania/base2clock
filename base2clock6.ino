@@ -24,7 +24,7 @@
 #define INTERVAL_TIME 9993
 // fine tune here after establishing an INTERVAL_TIME which is slighly slow and if you decrease by one it
 // will be fast. The higher this number the faster. If 99 is still too slow, drop INTERVAL_TIME by one. 
-#define PERCENT_FASTER 1
+#define PERCENT_FASTER 50
 
 //int's representing led's. 1 = on, 0 = off. Initially they will all be off.
 int p1,p2,p3,p4,p5,p6,p7,p8,p9 = 0;
