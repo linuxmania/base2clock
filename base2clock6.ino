@@ -33,6 +33,14 @@ int interval_time = INTERVAL_TIME;
 boolean time_set = false;
 unsigned long mils, prev_mils = 0;
 
+// function prototypes
+void setTimeSlow();
+void setTimeFast();
+void resetTimeSetFlags();
+boolean setIncrementFlag();
+void doIncrement();
+void lightLights();
+
 void setup(){
   //8 led's as outputs.
   pinMode(13, OUTPUT);
