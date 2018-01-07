@@ -22,7 +22,7 @@
 // #define INTERVAL_TIME 9991 slightly slow
 // #define INTERVAL_TIME 9990 very slightly slow
 
-#define INTERVAL_TIME 9993
+#define INTERVAL_TIME 9994
 
 // fine tune here after establishing an INTERVAL_TIME which is slighly slow and if you decrease by one it
 // will be fast. The higher this number the faster. If 99 is still too slow, drop INTERVAL_TIME by one. 
