@@ -122,6 +122,7 @@ void setTimeFast(){
 
 void resetTimeSetFlags(){
   time_set = true;
+  time_count = 0;
   iterations = 0;
   increment_flg = false;
 }
