@@ -29,6 +29,11 @@
 
 #define PERCENT_FASTER 1
 
+//seconds to blink on power up prior
+//to time being set. useful to ensure
+//new program has been downloaded.
+#define BLINK_DELAY 1
+
 //int's representing led's. 1 = on, 0 = off. Initially they will all be off.
 int p1,p2,p3,p4,p5,p6,p7,p8 = 0;
 int iterations, count, time_count = 0;
@@ -94,7 +99,7 @@ void loop(){
   // figure out the loop delay, typically 10 seconds, 1 second if the time has never been set
   // and we are blinking the lights
   if(!time_set) 
-    delay(1000);
+    delay(1000 * BLINK_DELAY);
   else delay(interval_time);
 } // end loop()
 
