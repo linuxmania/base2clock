@@ -75,8 +75,10 @@ void setup(){
 void loop(){
   if(time_set){ //time has been set, so increment as instructed.
     time_count++;
-    if(time_count == 1000 - (10*PERCENT_FASTER))
-     interval_time -= 1;
+    if(time_count == 1000 - (10*PERCENT_FASTER)){
+     if(interval_time == INTERVAL_TIME)
+       interval_time -= 1;
+    }
     if(time_count >= 1000){
      time_count = 0;
      interval_time = INTERVAL_TIME;
