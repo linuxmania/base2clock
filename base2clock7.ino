@@ -27,7 +27,7 @@
 // fine tune here after establishing an INTERVAL_TIME which is slighly slow and if you decrease by one it
 // will be fast. The higher this number the faster. If 99 is still too slow, drop INTERVAL_TIME by one. 
 
-#define PERCENT_FASTER 1
+#define PERCENT_FASTER 20
 
 //seconds to blink on power up prior
 //to time being set. useful to ensure
