@@ -90,19 +90,15 @@ void loop(){
       if(!setIncrementFlag()) 
         doIncrement(); 
     }
-  } else { // time has never been set so just blink the lights.
+    delay(interval_time);
+ } else { // time has never been set so just blink the lights.
     if(p8 == 0)
       p8 = p7 = p6 = p5 = p4 = p3 = p2 = p1 = 1;
     else	
       p8 = p7 = p6 = p5 = p4 = p3 = p2 = p1 = 0;
     lightLights();
-  }
-
-  // figure out the loop delay, typically 10 seconds, 1 second if the time has never been set
-  // and we are blinking the lights
-  if(!time_set) 
-    delay(1000 * BLINK_DELAY);
-  else delay(interval_time);
+    delay(1000 * BLINK_DELAY);
+ }
 } // end loop()
 
 void setTimeSlow(){
