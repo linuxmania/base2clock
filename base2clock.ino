@@ -30,8 +30,11 @@
 //int's representing led's. 1 = on, 0 = off. Initially they will all be off.
 int p1,p2,p3,p4,p5,p6,p7,p8 = 0;
 
+// iterations to count 10 seconds six times. count for timeSetFast.
 int iterations, count = 0;
 boolean time_set, increment_flg = false;
+
+// for timeSetSlow
 unsigned long mils, prev_mils = 0;
 
 // function prototypes
