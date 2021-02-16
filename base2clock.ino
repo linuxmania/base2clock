@@ -40,7 +40,7 @@ int iterations, count, time_count = 0;
 int interval_time = INTERVAL_TIME;
 boolean time_set, increment_flg = false;
 unsigned long mils, prev_mils = 0;
-boolean hasP1changed, hasP2changed, hasP3changed ,  hasP4changed, hasP5changed, hasP6changed, hasP7changed, hasP8changed =  false;
+// boolean hasP1changed, hasP2changed, hasP3changed ,  hasP4changed, hasP5changed, hasP6changed, hasP7changed, hasP8changed =  false;
 
 // function prototypes
 void setTimeSlow();
