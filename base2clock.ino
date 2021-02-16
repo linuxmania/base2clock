@@ -27,7 +27,7 @@
 // fine tune here after establishing an INTERVAL_TIME which is slighly slow and if you decrease by one it
 // will be fast. The higher this number the faster. If 99 is still too slow, drop INTERVAL_TIME by one. 
 
-#define PERCENT_FASTER 10
+// #define PERCENT_FASTER 10
 
 //seconds to blink on power up prior
 //to time being set. useful to ensure
@@ -75,7 +75,8 @@ void setup(){
 
 void loop(){
   if(time_set){ //time has been set, so increment as instructed.
-    time_count++;
+/*
+    time_count++;
     if(time_count == 1000 - (10*PERCENT_FASTER)){
      if(interval_time == INTERVAL_TIME)
        interval_time -= 1;
@@ -84,7 +85,7 @@ void loop(){
      time_count = 0;
      interval_time = INTERVAL_TIME;
     }
-
+*/
     iterations++;
     if(iterations == 6){
       iterations = 0;
@@ -98,7 +99,7 @@ void loop(){
     else	
       p8 = p7 = p6 = p5 = p4 = p3 = p2 = p1 = 0;
 
-    hasP1changed = hasP2changed = hasP3changed  =  hasP4changed = hasP5changed = hasP6changed = hasP7changed = hasP8changed =  true;
+ //   hasP1changed = hasP2changed = hasP3changed  =  hasP4changed = hasP5changed = hasP6changed = hasP7changed = hasP8changed =  true;
     lightLights();
     delay(1000 * BLINK_DELAY);
  }
@@ -141,46 +142,46 @@ void doIncrement(){
 
   if(p8 == 0){
     p8 = 1;
-    hasP8changed =  true;
+//    hasP8changed =  true;
   } 
   else if (p7 == 0){
     p7 = 1;
     p8 = 0;
-    hasP7changed = hasP8changed =  true;
+//    hasP7changed = hasP8changed =  true;
   } 
   else if (p6 == 0){
     p6 = 1;
     p8 = p7 = 0;
-    hasP6changed = hasP7changed = hasP8changed =  true;
+//    hasP6changed = hasP7changed = hasP8changed =  true;
   } 
   else if (p5 == 0){
     p5 = 1;
     p8 = p7 = p6 = 0;
-    hasP5changed = hasP6changed = hasP7changed = hasP8changed =  true;
+//    hasP5changed = hasP6changed = hasP7changed = hasP8changed =  true;
   } 
   else if (p4 == 0){
     p4 = 1;
     p8 = p7 = p6 = p5 = 0;
-    hasP4changed = hasP5changed = hasP6changed = hasP7changed = hasP8changed =  true;
+//    hasP4changed = hasP5changed = hasP6changed = hasP7changed = hasP8changed =  true;
   } 
   else if (p3 == 0){
     p3 = 1;
     p8 = p7 = p6 = p5 = p4 = 0;
-    hasP3changed  =  hasP4changed = hasP5changed = hasP6changed = hasP7changed = hasP8changed =  true;
+//    hasP3changed  =  hasP4changed = hasP5changed = hasP6changed = hasP7changed = hasP8changed =  true;
   } 
   else if (p2 == 0){
     p2 = 1;
     p8 = p7 = p6 = p5 = p4 = p3 = 0;
-    hasP2changed = hasP3changed  =  hasP4changed = hasP5changed = hasP6changed = hasP7changed = hasP8changed =  true;
+//    hasP2changed = hasP3changed  =  hasP4changed = hasP5changed = hasP6changed = hasP7changed = hasP8changed =  true;
   } 
   else if (p1 == 0){
     p1 = 1;
     p8 = p7 = p6 = p5 = p4 = p3 = p2 = 0;
-    hasP1changed = hasP2changed = hasP3changed  =  hasP4changed = hasP5changed = hasP6changed = hasP7changed = hasP8changed =  true;
+//    hasP1changed = hasP2changed = hasP3changed  =  hasP4changed = hasP5changed = hasP6changed = hasP7changed = hasP8changed =  true;
   } 
   else { // all lights were lit, so this increment resets them to all off
     p8 = p7 = p6 = p5 = p4 = p3 = p2 = p1 = 0;
-    hasP1changed = hasP2changed = hasP3changed  =  hasP4changed = hasP5changed = hasP6changed = hasP7changed = hasP8changed =  true;
+//    hasP1changed = hasP2changed = hasP3changed  =  hasP4changed = hasP5changed = hasP6changed = hasP7changed = hasP8changed =  true;
   }
 
   lightLights();
@@ -188,54 +189,54 @@ void doIncrement(){
 
 
 void lightLights() {
-  if(hasP1changed){
+//  if(hasP1changed){
     if(p1 == 1)
       digitalWrite(13, HIGH);
     else	
       digitalWrite(13, LOW);
-  }  
-  if(hasP2changed){
+//  }  
+//  if(hasP2changed){
     if(p2 == 1)
       digitalWrite(12, HIGH);
     else	
       digitalWrite(12, LOW);
-  }
-  if(hasP3changed){
+//  }
+//  if(hasP3changed){
     if(p3 == 1)
       digitalWrite(11, HIGH);
     else	
       digitalWrite(11, LOW);
-  }
-  if(hasP4changed){
+//  }
+//  if(hasP4changed){
     if(p4 == 1)
       digitalWrite(10, HIGH);
     else	
       digitalWrite(10, LOW);
-  }
-  if(hasP5changed){
+//  }
+//  if(hasP5changed){
     if(p5 == 1)
       digitalWrite(9, HIGH);
     else	
       digitalWrite(9, LOW);
-  }
-  if(hasP6changed){
+//  }
+//  if(hasP6changed){
     if(p6 == 1)
       digitalWrite(8, HIGH);
     else	
       digitalWrite(8, LOW);
-  }
-  if(hasP7changed){
+//  }
+//  if(hasP7changed){
     if(p7 == 1)
       digitalWrite(7, HIGH);
     else	
       digitalWrite(7, LOW);
-  }
-  if(hasP8changed){
+//  }
+//  if(hasP8changed){
     if(p8 == 1)
       digitalWrite(6, HIGH);
     else	
       digitalWrite(6, LOW);
-  }  
+//  }  
 
-  hasP1changed = hasP2changed = hasP3changed  =  hasP4changed = hasP5changed = hasP6changed = hasP7changed = hasP8changed =  false;
+//  hasP1changed = hasP2changed = hasP3changed  =  hasP4changed = hasP5changed = hasP6changed = hasP7changed = hasP8changed =  false;
 } // end lightLights()
