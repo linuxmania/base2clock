@@ -18,13 +18,13 @@
 *
 ****************************/
 
-// adjust this value to tune the clock. 10,000 should be close, lower if clock runs slow, higher if fast.
-
+// adjust this value to tune the clock. 
+//10,000 should be close. 
+//lower if clock runs slow, higher if fast.
 #define INTERVAL_TIME 10000
 
-//seconds to blink on power up prior
-//to time being set. useful to ensure
-//new program has been downloaded.
+//seconds to blink on power up prior to time being set. 
+//useful to change to ensure new program has been downloaded.
 #define BLINK_DELAY 1
 
 //int's representing led's. 1 = on, 0 = off. Initially they will all be off.
