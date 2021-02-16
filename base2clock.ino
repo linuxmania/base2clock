@@ -32,7 +32,13 @@ int p1,p2,p3,p4,p5,p6,p7,p8 = 0;
 
 // iterations to count 10 seconds six times. count for timeSetFast.
 int iterations, count = 0;
-boolean time_set, increment_flg = false;
+
+boolean time_set = false;
+
+//this is set to true after one minute and no action taken.
+//after two minutes it is set to false and the lights are incremented.
+//the exception is when p8, p7, and p6 are lit, then increment immediately after only one minute.
+boolean increment_flg = false;
 
 // for timeSetSlow
 unsigned long mils, prev_mils = 0;
