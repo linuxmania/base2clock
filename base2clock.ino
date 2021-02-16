@@ -37,7 +37,7 @@
 //int's representing led's. 1 = on, 0 = off. Initially they will all be off.
 int p1,p2,p3,p4,p5,p6,p7,p8 = 0;
 int iterations, count, time_count = 0;
-int interval_time = INTERVAL_TIME;
+// int interval_time = INTERVAL_TIME;
 boolean time_set, increment_flg = false;
 unsigned long mils, prev_mils = 0;
 // boolean hasP1changed, hasP2changed, hasP3changed ,  hasP4changed, hasP5changed, hasP6changed, hasP7changed, hasP8changed =  false;
@@ -92,7 +92,7 @@ void loop(){
       if(!setIncrementFlag()) 
         doIncrement(); 
     }
-    delay(interval_time);
+    delay(INTERVAL_TIME);
  } else { // time has never been set so just blink the lights.
     if(p8 == 0)
       p8 = p7 = p6 = p5 = p4 = p3 = p2 = p1 = 1;
