@@ -19,10 +19,10 @@
 ****************************/
 
 // adjust this value to tune the clock. 
-// 60,000 / minute
+// 10,000 / 10 seconds
 // set lower if clock runs slow, higher if fast.
-// 1.5 seconds/day  / millisecond
-#define INTERVAL_TIME 59975
+// 9 seconds/day  / millisecond
+#define INTERVAL_TIME 9993
 
 //seconds to blink on power up prior to time being set. 
 //useful to change to ensure new program has been downloaded.
@@ -33,6 +33,9 @@ int p1,p2,p3,p4,p5,p6,p7,p8 = 0;
 
 // count for timeSetFast.
 int count = 0;
+
+// count in 10 second increments
+int iterations = 0;
 
 boolean time_set = false;
 
@@ -79,8 +82,12 @@ void setup(){
 
 void loop(){
   if(time_set){ //time has been set, so increment as instructed.
-    if(!setIncrementFlag()) 
-      doIncrement(); 
+    iterations++;
+    if(iterations == 6){
+      iterations = 0;
+      if(!setIncrementFlag()) 
+        doIncrement(); 
+    }  
     delay(INTERVAL_TIME);
  } else { // time has never been set so just blink the lights.
     if(p8 == 0)
@@ -112,6 +119,7 @@ void setTimeFast(){
 
 void resetTimeSetFlags(){
   time_set = true;
+  iterations = 0;
   increment_flg = false;
 }
 
