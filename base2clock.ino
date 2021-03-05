@@ -35,6 +35,7 @@ int p1,p2,p3,p4,p5,p6,p7,p8 = 0;
 int count = 0;
 
 // count in 10 second increments
+// we do this so that when time is set it is off at most 10 seconds.
 int iterations = 0;
 
 boolean time_set = false;
