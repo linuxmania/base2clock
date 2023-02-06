@@ -22,7 +22,7 @@
 // 10,000 / 10 seconds
 // set lower if clock runs slow, higher if fast.
 // 9 seconds/day  / millisecond
-#define INTERVAL_TIME 9993
+#define INTERVAL_TIME 9992
 
 //seconds to blink on power up prior to time being set. 
 //useful to change to ensure new program has been downloaded.
