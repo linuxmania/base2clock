@@ -18,11 +18,7 @@
 *
 ****************************/
 
-// adjust this value to tune the clock. 
-// 10,000 / 10 seconds
-// set lower if clock runs slow, higher if fast.
-// 9 seconds/day  / millisecond
-//#define INTERVAL_TIME 9992
+// 12 seconds/day  / millisecond
 #define INTERVAL_TIME 7494
 
 //seconds to blink on power up prior to time being set. 
@@ -35,16 +31,10 @@ int p1,p2,p3,p4,p5,p6,p7,p8 = 0;
 // count for timeSetFast.
 int count = 0;
 
-// count in 10 second increments
-// we do this so that when time is set it is off at most 10 seconds.
+// count in 7.5 second increments
 int iterations = 0;
 
 boolean time_set = false;
-
-//this is set to true after one minute and no action taken.
-//after two minutes it is set to false and the lights are incremented.
-//the exception is when p8, p7, and p6 are lit, then increment immediately after only one minute.
-//boolean increment_flg = false;
 
 // for timeSetSlow
 unsigned long mils, prev_mils = 0;
@@ -53,7 +43,6 @@ unsigned long mils, prev_mils = 0;
 void setTimeSlow();
 void setTimeFast();
 void resetTimeSetFlags();
-//boolean setIncrementFlag();
 void doIncrement();
 void lightLights();
 
@@ -85,11 +74,9 @@ void setup(){
 void loop(){
   if(time_set){ //time has been set, so increment as instructed.
     iterations++;
-//    if(iterations == 6){
     if(iterations == 15){
       iterations = 0;
-//      if(!setIncrementFlag()) 
-        doIncrement(); 
+      doIncrement(); 
     }  
     delay(INTERVAL_TIME);
  } else { // time has never been set so just blink the lights.
@@ -123,21 +110,9 @@ void setTimeFast(){
 void resetTimeSetFlags(){
   time_set = true;
   iterations = 0;
-//  increment_flg = false;
 }
-
-/*
-boolean setIncrementFlag(){
-  if(increment_flg == false && (p8 == 0 || p7 == 0 || p6 == 0)){
-    increment_flg = true;
-    return true;
-  }
-  return false;
-}
-*/
 
 void doIncrement(){
-//  increment_flg = false;
 
   if(p8 == 0){
     p8 = 1;
