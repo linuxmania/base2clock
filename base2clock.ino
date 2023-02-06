@@ -28,7 +28,7 @@
 //int's representing led's. 1 = on, 0 = off. Initially they will all be off.
 int p1,p2,p3,p4,p5,p6,p7,p8 = 0;
 
-// count for timeSetFast.
+// count for timeSetFast n.b. make local
 int count = 0;
 
 // count in 7.5 second increments
@@ -36,7 +36,7 @@ int iterations = 0;
 
 boolean time_set = false;
 
-// for timeSetSlow
+// for timeSetSlow n.b. make local
 unsigned long mils, prev_mils = 0;
 
 // function prototypes
