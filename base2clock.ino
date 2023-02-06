@@ -74,7 +74,7 @@ void setup(){
 void loop(){
   if(time_set){ //time has been set, so increment as instructed.
     iterations++;
-    if(iterations == 15){
+    if(iterations == 15){ // 2 base2 minutes = 15*7.5 = 112.5 seconds; 1/16 shy of 2 minutes (7.5 seconds)
       iterations = 0;
       doIncrement(); 
     }  
