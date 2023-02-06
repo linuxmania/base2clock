@@ -53,7 +53,7 @@ unsigned long mils, prev_mils = 0;
 void setTimeSlow();
 void setTimeFast();
 void resetTimeSetFlags();
-boolean setIncrementFlag();
+//boolean setIncrementFlag();
 void doIncrement();
 void lightLights();
 
@@ -88,7 +88,7 @@ void loop(){
 //    if(iterations == 6){
     if(iterations == 15){
       iterations = 0;
-      if(!setIncrementFlag()) 
+//      if(!setIncrementFlag()) 
         doIncrement(); 
     }  
     delay(INTERVAL_TIME);
@@ -123,9 +123,10 @@ void setTimeFast(){
 void resetTimeSetFlags(){
   time_set = true;
   iterations = 0;
-  increment_flg = false;
+//  increment_flg = false;
 }
 
+/*
 boolean setIncrementFlag(){
   if(increment_flg == false && (p8 == 0 || p7 == 0 || p6 == 0)){
     increment_flg = true;
@@ -133,9 +134,10 @@ boolean setIncrementFlag(){
   }
   return false;
 }
+*/
 
 void doIncrement(){
-  increment_flg = false;
+//  increment_flg = false;
 
   if(p8 == 0){
     p8 = 1;
