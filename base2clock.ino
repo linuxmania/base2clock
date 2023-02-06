@@ -22,7 +22,8 @@
 // 10,000 / 10 seconds
 // set lower if clock runs slow, higher if fast.
 // 9 seconds/day  / millisecond
-#define INTERVAL_TIME 9992
+//#define INTERVAL_TIME 9992
+#define INTERVAL_TIME 7500
 
 //seconds to blink on power up prior to time being set. 
 //useful to change to ensure new program has been downloaded.
@@ -43,7 +44,7 @@ boolean time_set = false;
 //this is set to true after one minute and no action taken.
 //after two minutes it is set to false and the lights are incremented.
 //the exception is when p8, p7, and p6 are lit, then increment immediately after only one minute.
-boolean increment_flg = false;
+//boolean increment_flg = false;
 
 // for timeSetSlow
 unsigned long mils, prev_mils = 0;
@@ -84,7 +85,8 @@ void setup(){
 void loop(){
   if(time_set){ //time has been set, so increment as instructed.
     iterations++;
-    if(iterations == 6){
+//    if(iterations == 6){
+    if(iterations == 15){
       iterations = 0;
       if(!setIncrementFlag()) 
         doIncrement(); 
