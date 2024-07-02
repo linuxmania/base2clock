@@ -42,7 +42,6 @@ unsigned long mils, prev_mils = 0;
 // function prototypes
 void setTimeSlow();
 void setTimeFast();
-void resetTimeSetFlags();
 void doIncrement();
 void lightLights();
 
@@ -91,7 +90,8 @@ void loop(){
 } // end loop()
 
 void setTimeSlow(){
-  resetTimeSetFlags();
+  time_set = true;
+  iterations = 0;
   mils = millis();
   if(mils - prev_mils > 50)
     doIncrement();
@@ -99,17 +99,13 @@ void setTimeSlow(){
 }
 
 void setTimeFast(){
-  resetTimeSetFlags(); 
+  time_set = true;
+  iterations = 0;
   count++;
   if(count > 5000){
     count = 0;
     doIncrement();
   } 
-}
-
-void resetTimeSetFlags(){
-  time_set = true;
-  iterations = 0;
 }
 
 void doIncrement(){
